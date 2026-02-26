@@ -1,51 +1,86 @@
 const params = new URLSearchParams(location.search);
 const chapterId = params.get("id");
 
+// クイズデータ
 const quizzes = [
   [
-    { q: "問題1?", a: ["答え1", "答え2"], correct: 0 },
-    { q: "問題2?", a: ["答えA", "答えB"], correct: 1 }
+    {
+      q: "問題1: JavaScriptの変数を宣言するときのキーワードは？",
+      a: ["var", "foo", "1st"],
+      correct: 0
+    },
+    {
+      q: "問題2: 配列の最後に値を追加するメソッドは？",
+      a: ["pop()", "push()", "shift()"],
+      correct: 1
+    }
   ],
   [
-    { q: "別チャプ1?", a: ["答X", "答Y"], correct: 1 }
+    {
+      q: "別チャプ1: HTMLのタグはどれ？",
+      a: ["<>", "!!", "<html>"],
+      correct: 2
+    }
   ]
 ];
 
-const quizSection = document.getElementById("quizSection");
+// DOM
+const quizForm = document.getElementById("quizForm");
+const submitBtn = document.getElementById("submitBtn");
 const resultArea = document.getElementById("result");
 const homeBtn = document.getElementById("homeBtn");
 
-let score = 0;
-let currentIndex = 0;
-
-function showQuestion() {
-  const item = quizzes[chapterId - 1][currentIndex];
-  quizSection.innerHTML = `<p>${item.q}</p>`;
+// 表示
+quizzes[chapterId - 1].forEach((item, i) => {
+  const div = document.createElement("div");
+  div.classList.add("quiz-question");
+  div.innerHTML = `<p>${i + 1}. ${item.q}</p>`;
 
   item.a.forEach((ans, ai) => {
-    const btn = document.createElement("button");
-    btn.textContent = ans;
-    btn.onclick = () => {
-      if (ai === item.correct) score++;
-      currentIndex++;
-      if (currentIndex < quizzes[chapterId - 1].length) {
-        showQuestion();
-      } else {
-        showResult();
-      }
-    };
-    quizSection.appendChild(btn);
+    const id = `q${i}_a${ai}`;
+    div.innerHTML += `
+      <div>
+        <input type="radio" name="q${i}" id="${id}" value="${ai}">
+        <label for="${id}">${ans}</label>
+      </div>
+    `;
   });
-}
 
-function showResult() {
-  quizSection.style.display = "none";
-  resultArea.innerHTML = `
-    <h3>結果</h3>
-    <p>正答率：${((score / quizzes[chapterId - 1].length) * 100).toFixed(1)}%</p>
-  `;
+  quizForm.appendChild(div);
+});
+
+// 採点処理
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  
+  let score = 0;
+  let total = quizzes[chapterId - 1].length;
+  resultArea.innerHTML = "<h3>採点結果</h3>";
+
+  quizzes[chapterId - 1].forEach((item, i) => {
+    const selected = quizForm[`q${i}`].value;
+    const correct = item.correct;
+    
+    const isCorrect = parseInt(selected) === correct;
+    if (isCorrect) score++;
+
+    resultArea.innerHTML += `
+      <p>
+        問${i + 1}：
+        ${isCorrect ? "✅ 正解" : "❌ 不正解"} 
+        （あなた: ${selected || "選択なし"} / 正解: ${item.a[correct]}）
+      </p>
+    `;
+  });
+
+  const rate = ((score / total) * 100).toFixed(1);
+  resultArea.innerHTML += `<p>正答率：${rate}% (${score}/${total})</p>`;
+
+  submitBtn.style.display = "none";
   homeBtn.style.display = "block";
-  homeBtn.onclick = () => location.href = "index.html";
-}
+});
 
-showQuestion();
+// ホームへ戻る
+homeBtn.addEventListener("click", () => {
+  location.href = "home.html";
+});
