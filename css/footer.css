@@ -1,42 +1,13 @@
-/* ⬇ sticky footer に必要な基本設定 ⬇ */
-html, body {
-  height: 100%;       /* 最低画面いっぱいに */
-  margin: 0;          /* 余白リセット */
-}
-
-/* body を縦の flex コンテナにして、
-   中の .login-container を伸ばす仕組みです */
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-container {
-  flex: 1;  /* フッターを下に押し出す */
-}
-
-/* フッターの見た目 */
+/* footer を画面下部に固定 */
 footer.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #222;
   color: #fff;
   text-align: center;
-  padding: 16px 0;
+  padding: 10px 0;
   font-size: 0.9rem;
-}
-footer.footer a {
-  color: #ccc;
-  text-decoration: none;
-  margin: 0 8px;
-}
-footer.footer a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* モバイル調整 */
-@media (max-width:480px) {
-  footer.footer {
-    font-size: 0.8rem;
-    padding: 12px 0;
-  }
+  z-index: 999;
 }
