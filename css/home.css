@@ -1,39 +1,85 @@
-/* ページタイトル */
-.page-title {
-  font-size: 2rem;
+/* 全体リセット */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fafafa;
+}
+
+/* ヘッダー */
+.page-header {
   text-align: center;
-  margin-top: 30px;
+  padding: 24px 0;
+}
+.page-header h1 {
+  font-size: 2rem;
   color: #333;
 }
 
-/* メニューリスト全体 */
-.menu {
-  list-style: none;
-  padding: 0;
-  max-width: 360px;
-  margin: 30px auto;
+/* チャプターカード用グリッド */
+.chapters {
+  display: grid;
+  gap: 12px;
+  padding: 0 14px;
+  margin-bottom: 24px;
 }
 
-/* 各項目 */
-.menu li {
-  margin-bottom: 14px;
-}
-
-/* リンク */
-.menu a {
-  display: block;
+/* カード */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
   text-decoration: none;
-  background: #5a46d8;
-  color: #fff;
-  padding: 14px 18px;
-  border-radius: 8px;
+  color: #222;
   font-size: 1rem;
   font-weight: 600;
-  transition: 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.18);
 }
 
-/* ホバー時 */
-.menu a:hover {
+/* サブメニュー（設定・進捗） */
+.sub-menu {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.sub-link {
+  background: #5a46d8;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .2s ease;
+}
+.sub-link:hover {
   background: #4230a2;
-  transform: scale(1.03);
+}
+
+/* footer */
+.footer {
+  text-align: center;
+  padding: 14px 0;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* スマホ: 1列 */
+@media (max-width: 767px) {
+  .chapters {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* PC: 2列 またはそれ以上（画面幅に応じて） */
+@media (min-width: 768px) {
+  .chapters {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    padding: 0 24px;
+  }
 }

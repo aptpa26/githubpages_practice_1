@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ホーム</title>
 
-  <!-- 全体CSS -->
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- ホーム専用CSS -->
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
 
-  <h1 class="page-title">ホーム</h1>
+  <header class="page-header">
+    <h1>ホーム</h1>
+  </header>
 
-  <ul class="menu">
-    <li><a href="settings.html">設定</a></li>
-    <li><a href="progress.html">進捗</a></li>
-    <li><a href="chapter.html?id=1">チャプター1</a></li>
-    <li><a href="chapter.html?id=2">チャプター2</a></li>
-    <li><a href="chapter.html?id=3">チャプター3</a></li>
-    <li><a href="chapter.html?id=4">チャプター4</a></li>
-    <li><a href="chapter.html?id=5">チャプター5</a></li>
-    <li><a href="chapter.html?id=6">チャプター6</a></li>
-    <li><a href="chapter.html?id=7">チャプター7</a></li>
-    <li><a href="chapter.html?id=8">チャプター8</a></li>
-  </ul>
+  <section class="chapters">
+    <a href="chapter.html?id=1" class="card">チャプター1</a>
+    <a href="chapter.html?id=2" class="card">チャプター2</a>
+    <a href="chapter.html?id=3" class="card">チャプター3</a>
+    <a href="chapter.html?id=4" class="card">チャプター4</a>
+    <a href="chapter.html?id=5" class="card">チャプター5</a>
+    <a href="chapter.html?id=6" class="card">チャプター6</a>
+    <a href="chapter.html?id=7" class="card">チャプター7</a>
+    <a href="chapter.html?id=8" class="card">チャプター8</a>
+  </section>
+
+  <nav class="sub-menu">
+    <a href="settings.html" class="sub-link">設定</a>
+    <a href="progress.html" class="sub-link">進捗</a>
+  </nav>
 
   <div id="footer-placeholder"></div>
 
