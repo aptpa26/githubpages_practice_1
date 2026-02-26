@@ -9,22 +9,14 @@
 <body>
 
 <header class="header">
-  <h1 class="logo">学習アプリ</h1>
-
-  <!-- ハンバーガーボタン -->
-  <div class="hamburger" id="hamburger">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </div>
-
-  <!-- ナビメニュー -->
-  <nav class="nav-menu" id="nav-menu">
-    <a href="#courses">コース</a>
-    <a href="#progress">進捗</a>
-    <a href="#settings">設定</a>
-  </nav>
+  <h1>学習アプリ</h1>
 </header>
+
+<nav class="nav">
+  <a href="#courses">コース</a>
+  <a href="#progress">進捗</a>
+  <a href="#settings">設定</a>
+</nav>
 
 <section class="hero">
   <h2>今日のおすすめ</h2>
@@ -32,24 +24,23 @@
 </section>
 
 <section class="cards">
-  <div class="card"><h3>数学</h3><p>10 問 • 5 分</p></div>
-  <div class="card"><h3>英語</h3><p>8 問 • 6 分</p></div>
-  <div class="card"><h3>プログラミング</h3><p>12 問 • 15 分</p></div>
+  <div class="card">
+    <h3>数学</h3>
+    <p>10 問 • 5 分</p>
+  </div>
+  <div class="card">
+    <h3>英語</h3>
+    <p>8 問 • 6 分</p>
+  </div>
+  <div class="card">
+    <h3>プログラミング</h3>
+    <p>12 問 • 15 分</p>
+  </div>
 </section>
 
 <footer class="footer">
   <p>© 2025 学習アプリ</p>
 </footer>
-
-<script>
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
-</script>
 
 </body>
 </html>
