@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>チャプター</title>
+  <title>チャプター動画</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="chapter-container">
-  <!-- YouTube動画埋め込み（レスポンシブ対応） -->
-  <iframe id="ytVideo" src="" allowfullscreen></iframe>
+<div class="container">
+  <h2>動画を見る</h2>
 
-  <!-- クイズセクション -->
-  <div id="quizSection"></div>
-  <button id="startQuiz">クイズへ</button>
+  <!-- YouTube動画埋め込み -->
+  <iframe
+    id="ytVideo"
+    width="100%"
+    src=""
+    allowfullscreen
+  ></iframe>
+
+  <button id="goQuizBtn">クイズへ</button>
+
 </div>
 
-<script src="js/chapter.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  const chapterId = params.get("id");
+
+  const videoIds = [
+    "VIDEO_ID1",
+    "VIDEO_ID2",
+    // 追加...
+  ];
+
+  document.getElementById("ytVideo").src =
+    "https://www.youtube.com/embed/" +
+    videoIds[chapterId - 1] +
+    "?rel=0&modestbranding=1";
+
+  // 任意でクイズページへ移動
+  document.getElementById("goQuizBtn").addEventListener("click", () => {
+    location.href = `chapter-quiz.html?id=${chapterId}`;
+  });
+</script>
+
 </body>
 </html>
