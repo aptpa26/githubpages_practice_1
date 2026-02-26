@@ -60,29 +60,16 @@ body {
 .bottom-nav .nav-link {
   text-decoration: none;
   color: #555;
-  font-size: 1rem; /* 少し大きめで読みやすく */
+  font-size: large; /* 少し大きめで読みやすく */
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: color 0.2s; /* 色変化を滑らかに */
 }
 
 /* アイコンのサイズ調整 */
 .bottom-nav .label {
   font-size: 0.8rem; /* 少し広めにして見やすく */
   margin-top: 4px;
-}
-
-/* タップ時の反応 */
-.bottom-nav .nav-link:hover,
-.bottom-nav .nav-link:active {
-  color: #5a46d8;
-}
-
-/* 現在のページを示すアクティブ状態 */
-.bottom-nav .nav-link.active {
-  color: #5a46d8;
-  font-weight: 500;
 }
 
 /* スマホ: 1列 */
