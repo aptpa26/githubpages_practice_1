@@ -47,47 +47,42 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.85); /* 半透明 */
-  backdrop-filter: blur(12px); /* ぼかし効果 */
+  background: #fff;
   border-top: 1px solid #ddd;
   display: flex;
   justify-content: space-around;
-  padding: 8px 0;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px 0; /* タップしやすい高さに調整 */
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
   z-index: 1000;
 }
 
-/* タブリンク */
+/* 各リンク */
 .bottom-nav .nav-link {
   text-decoration: none;
-  color: #777;
-  font-size: 0.75rem;
-  font-weight: 600;
+  color: #555;
+  font-size: 1rem; /* 少し大きめで読みやすく */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  transition: color 0.25s ease;
-  padding: 4px 6px;
+  transition: color 0.2s; /* 色変化を滑らかに */
 }
 
-/* アイコン大きめ */
-.bottom-nav .nav-link .icon {
-  font-size: 1.6rem;
+/* アイコンのサイズ調整 */
+.bottom-nav .label {
+  font-size: 0.8rem; /* 少し広めにして見やすく */
+  margin-top: 4px;
 }
 
-/* アクティブ状態 */
+/* タップ時の反応 */
+.bottom-nav .nav-link:hover,
+.bottom-nav .nav-link:active {
+  color: #5a46d8;
+}
+
+/* 現在のページを示すアクティブ状態 */
 .bottom-nav .nav-link.active {
   color: #5a46d8;
-}
-.bottom-nav .nav-link.active .icon {
-  transform: translateY(-2px);
-  color: #5a46d8;
-}
-
-/* ホバー効果 */
-.bottom-nav .nav-link:hover {
-  color: #444;
+  font-weight: 500;
 }
 
 /* スマホ: 1列 */
