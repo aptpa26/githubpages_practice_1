@@ -1,0 +1,53 @@
+/* login.css */
+/* ===== ログインフォーム専用 ===== */
+
+/* 外枠カード */
+.login-card {
+  max-width: 380px;
+  margin: 4rem auto;
+  padding: 2.2rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* 見出し */
+.login-card h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.6rem;
+}
+
+/* 入力スタイル */
+.login-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 0.8rem 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color .3s ease;
+}
+
+.login-card input:focus {
+  border-color: #5856d6;
+  outline: none;
+}
+
+/* ボタン */
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 1rem;
+  background-image: linear-gradient(90deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  opacity: 0.95;
+}
