@@ -1,8 +1,42 @@
-<ul class="menu">
-  <li><a href="settings.html">設定</a></li>
-  <li><a href="progress.html">進捗</a></li>
-  <li><a href="chapter.html?id=1">チャプター1</a></li>
-  <li><a href="chapter.html?id=2">チャプター2</a></li>
-  ...
-  <li><a href="chapter.html?id=8">チャプター8</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ホーム</title>
+
+  <!-- 全体CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ホーム専用CSS -->
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <h1 class="page-title">ホーム</h1>
+
+  <ul class="menu">
+    <li><a href="settings.html">設定</a></li>
+    <li><a href="progress.html">進捗</a></li>
+    <li><a href="chapter.html?id=1">チャプター1</a></li>
+    <li><a href="chapter.html?id=2">チャプター2</a></li>
+    <li><a href="chapter.html?id=3">チャプター3</a></li>
+    <li><a href="chapter.html?id=4">チャプター4</a></li>
+    <li><a href="chapter.html?id=5">チャプター5</a></li>
+    <li><a href="chapter.html?id=6">チャプター6</a></li>
+    <li><a href="chapter.html?id=7">チャプター7</a></li>
+    <li><a href="chapter.html?id=8">チャプター8</a></li>
+  </ul>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+  </script>
+
+</body>
+</html>

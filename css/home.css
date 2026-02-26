@@ -1,0 +1,39 @@
+/* ページタイトル */
+.page-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 30px;
+  color: #333;
+}
+
+/* メニューリスト全体 */
+.menu {
+  list-style: none;
+  padding: 0;
+  max-width: 360px;
+  margin: 30px auto;
+}
+
+/* 各項目 */
+.menu li {
+  margin-bottom: 14px;
+}
+
+/* リンク */
+.menu a {
+  display: block;
+  text-decoration: none;
+  background: #5a46d8;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+/* ホバー時 */
+.menu a:hover {
+  background: #4230a2;
+  transform: scale(1.03);
+}
