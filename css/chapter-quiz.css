@@ -67,6 +67,7 @@ input[type="radio"] {
 
 /* 結果表示 */
 #result {
+  display: none; /* 最初は隠す */
   margin-top: 22px;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -93,7 +94,6 @@ input[type="radio"] {
   background-color: #1e88e5;
 }
 
-/*追加*/
 /* 正解 */
 .correct-answer {
   background-color: #d4edda !important; /* 薄い緑 */

@@ -3,6 +3,7 @@
 <head>
   <title>チャプター動画</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chapter.css">  
 </head>
 <body>
 
@@ -10,12 +11,13 @@
   <h2>動画を見る</h2>
 
   <!-- YouTube動画埋め込み -->
-  <iframe
-    id="ytVideo"
-    width="100%"
-    src=""
-    allowfullscreen
-  ></iframe>
+  <div class="video-wrapper">
+    <iframe
+      id="ytVideo"
+      src=""
+      allowfullscreen
+    ></iframe>
+  </div>
 
   <button id="goQuizBtn">クイズへ</button>
 

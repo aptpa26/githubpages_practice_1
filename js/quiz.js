@@ -53,6 +53,8 @@ quizzes[chapterId - 1].forEach((item, i) => {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
+  resultArea.style.display = "block";
+
   let score = 0;
   let total = quizzes[chapterId - 1].length;
 
