@@ -52,23 +52,47 @@ quizzes[chapterId - 1].forEach((item, i) => {
 // 採点処理
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  
+
   let score = 0;
   let total = quizzes[chapterId - 1].length;
+
   resultArea.innerHTML = "<h3>採点結果</h3>";
 
   quizzes[chapterId - 1].forEach((item, i) => {
     const selected = quizForm[`q${i}`].value;
     const correct = item.correct;
-    
-    const isCorrect = parseInt(selected) === correct;
-    if (isCorrect) score++;
+
+    // 各質問エリアを取得
+    const container = quizForm.querySelector(`div.quiz-question:nth-child(${i+1})`);
+
+    // 全ラベルを取得
+    const labels = container.querySelectorAll("label");
+
+    labels.forEach((label, ai) => {
+      label.classList.remove("correct-answer", "incorrect-answer", "not-selected");
+
+      if (ai == correct) {
+        // 正解ラベル
+        label.classList.add("correct-answer");
+      }
+      if (ai == parseInt(selected)) {
+        // ユーザー選択
+        if (ai == correct) {
+          score++;
+        } else {
+          label.classList.add("incorrect-answer");
+        }
+      } else if (selected === "") {
+        // 選択なしの場合
+        label.classList.add("not-selected");
+      }
+    });
 
     resultArea.innerHTML += `
-    <p>
+      <p>
         問${i + 1}：
-        ${isCorrect ? "✅ 正解" : `❌ 不正解 (正解: ${item.a[correct]})`} 
-    </p>
+        ${parseInt(selected) === correct ? "✅ 正解" : "❌ 不正解"} 
+      </p>
     `;
   });
 

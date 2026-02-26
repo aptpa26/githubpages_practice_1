@@ -92,3 +92,23 @@ input[type="radio"] {
 #homeBtn:hover {
   background-color: #1e88e5;
 }
+
+/*追加*/
+/* 正解 */
+.correct-answer {
+  background-color: #d4edda !important; /* 薄い緑 */
+  border-color: #28a745 !important;     /* 緑の枠 */
+  color: #155724;
+}
+
+/* 不正解 */
+.incorrect-answer {
+  background-color: #f8d7da !important; /* 薄い赤 */
+  border-color: #dc3545 !important;     /* 赤の枠 */
+  color: #721c24;
+}
+
+/* 正解未選択のその他ラベル（optional） */
+.not-selected {
+  opacity: 0.6;
+}
