@@ -10,6 +10,9 @@
 
   <!-- ログイン画面専用CSS -->
   <link rel="stylesheet" href="css/login.css">
+
+  <!-- フッター用CSS -->
+  <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
 
@@ -26,9 +29,15 @@
     </form>
   </div>
 
-  <footer class="footer">
-    v-2
-  </footer>
+  <div id="footer-placeholder"></div>
+
+  <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+  </script>
 
   <script src="js/login.js"></script>
 </body>

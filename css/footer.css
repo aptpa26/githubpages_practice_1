@@ -1,0 +1,17 @@
+/* ===== footer ===== */
+.footer {
+  background-color: #1a1a1a; /* ダーク背景 */
+  color: #fff;               /* 白文字 */
+  text-align: center;        /* 中央揃え */
+  padding: 12px 0;           /* 上下の余白 */
+  font-size: 0.85rem;        /* 少し小さめ文字 */
+  margin-top: 30px;          /* 上との余白 */
+}
+
+/* スマホ用調整 */
+@media (max-width: 480px) {
+  .footer {
+    font-size: 0.8rem;
+    padding: 10px 0;
+  }
+}
