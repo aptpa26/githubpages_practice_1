@@ -1,0 +1,22 @@
+/* PC向け */
+@media (min-width: 768px) {
+  .container {
+    width: 720px;
+    margin: auto;
+  }
+}
+
+/* スマホ向け */
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+/* YouTube埋め込みをアスペクト比でレスポンシブ */
+iframe[src*="youtube.com"] {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
