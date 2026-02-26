@@ -1,17 +1,42 @@
-/* ===== footer ===== */
-.footer {
-  background-color: #1a1a1a; /* ダーク背景 */
-  color: #fff;               /* 白文字 */
-  text-align: center;        /* 中央揃え */
-  padding: 12px 0;           /* 上下の余白 */
-  font-size: 0.85rem;        /* 少し小さめ文字 */
-  margin-top: 30px;          /* 上との余白 */
+/* ⬇ sticky footer に必要な基本設定 ⬇ */
+html, body {
+  height: 100%;       /* 最低画面いっぱいに */
+  margin: 0;          /* 余白リセット */
 }
 
-/* スマホ用調整 */
-@media (max-width: 480px) {
-  .footer {
+/* body を縦の flex コンテナにして、
+   中の .login-container を伸ばす仕組みです */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
+  flex: 1;  /* フッターを下に押し出す */
+}
+
+/* フッターの見た目 */
+footer.footer {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 0.9rem;
+}
+footer.footer a {
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 8px;
+}
+footer.footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* モバイル調整 */
+@media (max-width:480px) {
+  footer.footer {
     font-size: 0.8rem;
-    padding: 10px 0;
+    padding: 12px 0;
   }
 }
