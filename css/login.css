@@ -1,53 +1,76 @@
-/* login.css */
-/* ===== ログインフォーム専用 ===== */
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* 外枠カード */
-.login-card {
-  max-width: 380px;
-  margin: 4rem auto;
-  padding: 2.2rem;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
+/* 背景 */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ログインカード */
+.login-container {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  padding: 40px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
 /* 見出し */
-.login-card h2 {
-  text-align: center;
+.login-container h2 {
+  color: #fff;
+  margin-bottom: 20px;
   font-size: 1.8rem;
-  margin-bottom: 1.6rem;
 }
 
-/* 入力スタイル */
-.login-card input {
+/* 入力欄 */
+.login-container input {
   width: 100%;
-  padding: 12px 14px;
-  margin: 0.8rem 0;
-  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: none;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color .3s ease;
+  background: rgba(255,255,255,0.9);
+  transition: 0.25s;
 }
 
-.login-card input:focus {
-  border-color: #5856d6;
-  outline: none;
+.login-container input:focus {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* ボタン */
-.login-card button {
+.login-container button {
   width: 100%;
   padding: 12px;
-  margin-top: 1rem;
-  background-image: linear-gradient(90deg, #667eea, #764ba2);
+  background: #5a46d8;
   color: #fff;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.login-card button:hover {
-  opacity: 0.95;
+.login-container button:hover {
+  background: #4230a2;
+}
+
+/* リンク */
+.login-container p a {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 0.9rem;
 }

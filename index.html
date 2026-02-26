@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ログイン | サイト名</title>
+  <title>ログイン</title>
 
-  <!-- CSSを読み込む -->
+  <!-- 必要であれば全体共通CSS -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- ログイン画面専用CSS -->
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+
   <div class="login-container">
-    <form id="loginForm" action="#" method="POST">
+    <form id="loginForm">
       <h2>ログイン</h2>
 
-      <input type="text" placeholder="ユーザー名" id="user" name="user" required>
-      <input type="password" placeholder="パスワード" id="pass" name="pass" required>
+      <input type="text" id="user" name="user" placeholder="ユーザー名" required>
+      <input type="password" id="pass" name="pass" placeholder="パスワード" required>
 
       <button type="submit">ログイン</button>
 
-      <!-- 忘れた場合リンク -->
       <p><a href="#">パスワードを忘れた方</a></p>
     </form>
   </div>
 
-  <!-- 必要なJavaScript -->
   <script src="js/login.js"></script>
 </body>
 </html>
