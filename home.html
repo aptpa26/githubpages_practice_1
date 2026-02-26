@@ -7,7 +7,6 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/home.css">
-  <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
 
@@ -29,22 +28,15 @@
   <!-- 下部固定ナビ -->
   <nav class="bottom-nav">
     <a href="settings.html" class="nav-link">
-      ⚙️<span class="label">設定</span>
+      <div class="icon">⚙️</div>
+      <div class="label">設定</div>
     </a>
-    <a href="progress.html" class="nav-link">
-      📊<span class="label">進捗</span>
+
+    <a href="progress.html" class="nav-link active">
+      <div class="icon">📊</div>
+      <div class="label">進捗</div>
     </a>
   </nav>
-
-  <div id="footer-placeholder"></div>
-
-  <script>
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById('footer-placeholder').innerHTML = html;
-    });
-  </script>
 
 </body>
 </html>
