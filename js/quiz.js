@@ -65,11 +65,10 @@ submitBtn.addEventListener("click", (e) => {
     if (isCorrect) score++;
 
     resultArea.innerHTML += `
-      <p>
+    <p>
         問${i + 1}：
-        ${isCorrect ? "✅ 正解" : "❌ 不正解"} 
-        （あなた: ${selected || "選択なし"} / 正解: ${item.a[correct]}）
-      </p>
+        ${isCorrect ? "✅ 正解" : `❌ 不正解 (正解: ${item.a[correct]})`} 
+    </p>
     `;
   });
 
