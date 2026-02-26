@@ -1,20 +1,32 @@
-/* PC向け */
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 全体フォント・背景 */
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* レスポンシブコンテナ */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
 @media (min-width: 768px) {
   .container {
-    width: 720px;
-    margin: auto;
+    max-width: 720px;
   }
 }
 
-/* スマホ向け */
-@media (max-width: 767px) {
-  .container {
-    width: 100%;
-    padding: 0 10px;
-  }
-}
-
-/* YouTube埋め込みをアスペクト比でレスポンシブ */
+/* YouTube埋め込みのレスポンシブ */
 iframe[src*="youtube.com"] {
   width: 100%;
   aspect-ratio: 16 / 9;
