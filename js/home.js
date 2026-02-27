@@ -34,7 +34,7 @@ async function init() {
 async function fetchHomeData(token) {
   const res = await fetch(GAS_URL, {
     method: "POST",
-    headers: { "Content-Type": "text/plain/json;charset=utf-8" },
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify({
       path: "getHomeData",
       token: token
@@ -114,7 +114,7 @@ async function updateProgress(chapterId, status, token) {
   try {
     const res = await fetch(GAS_URL, {
       method: "POST",
-      headers: { "Content-Type": "text/plain/json;charset=utf-8" },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({
         path: "updateProgress",
         token,
