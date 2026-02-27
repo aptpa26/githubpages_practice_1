@@ -1,3 +1,5 @@
+console.log("init start")
+
 const GAS_URL = "https://script.google.com/macros/s/AKfycbwNrCeV86YSoLym46BCSDBDli3k34TN74--TDrnU-vPXOiG_-tnguE_fR81FVcr7DYTSQ/exec";
 
 // ページ読み込み後に実行（defer 前提）
