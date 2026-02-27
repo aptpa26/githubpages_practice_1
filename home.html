@@ -14,16 +14,7 @@
     <h1>ホーム</h1>
   </header>
 
-  <section class="chapters">
-    <a href="chapter.html?id=1" class="card">チャプター1</a>
-    <a href="chapter.html?id=2" class="card">チャプター2</a>
-    <a href="chapter.html?id=3" class="card">チャプター3</a>
-    <a href="chapter.html?id=4" class="card">チャプター4</a>
-    <a href="chapter.html?id=5" class="card">チャプター5</a>
-    <a href="chapter.html?id=6" class="card">チャプター6</a>
-    <a href="chapter.html?id=7" class="card">チャプター7</a>
-    <a href="chapter.html?id=8" class="card">チャプター8</a>
-  </section>
+  <section class="chapters" id="chapters"></section>
 
   <!-- 下部固定ナビ -->
   <nav class="bottom-nav">
@@ -37,6 +28,35 @@
       <div class="label">進捗</div>
     </a>
   </nav>
+
+  <script>
+    fetch('chapters.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('chapters');
+
+        data.forEach(chapter => {
+          const card = document.createElement('a');
+          card.href = `chapter.html?id=${chapter.id}`;
+          card.className = `card ${chapter.status}`;
+
+          card.innerHTML = `
+            <div class="title">${chapter.title}</div>
+            <div class="status">${getStatusText(chapter.status)}</div>
+          `;
+
+          container.appendChild(card);
+        });
+      });
+
+    function getStatusText(status) {
+      switch(status) {
+        case 'completed': return '✅ 完了';
+        case 'in-progress': return '🕒 進行中';
+        default: return '⬜ 未履修';
+      }
+    }
+  </script>
 
 </body>
 </html>
