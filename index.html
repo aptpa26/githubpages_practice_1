@@ -7,10 +7,8 @@
 
   <!-- 必要であれば全体共通CSS -->
   <link rel="stylesheet" href="css/style.css">
-
   <!-- ログイン画面専用CSS -->
   <link rel="stylesheet" href="css/login.css">
-
   <!-- フッター用CSS -->
   <link rel="stylesheet" href="css/footer.css">
 </head>
@@ -24,21 +22,23 @@
       <input type="password" id="pass" name="pass" placeholder="パスワード" required>
 
       <button type="submit">ログイン</button>
-
-      <!--p><a href="#">パスワードを忘れた方</a></p-->
     </form>
+    <div id="status" style="color:red; margin-top:10px;"></div>
   </div>
 
   <div id="footer-placeholder"></div>
 
   <script>
+  // フッター読み込み
   fetch('footer.html')
     .then(response => response.text())
     .then(html => {
       document.getElementById('footer-placeholder').innerHTML = html;
     });
+
   </script>
 
   <script src="js/login.js"></script>
+
 </body>
 </html>
