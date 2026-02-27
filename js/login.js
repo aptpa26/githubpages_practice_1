@@ -16,19 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const res = await fetch(`${GAS_URL}?path=login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ id, password: pw })
       });
 
       const j = await res.json();
-
       if (j.ok && j.token) {
         localStorage.setItem("token", j.token);
-        window.location.href = "home.html"; // ログイン後のページ
+        window.location.href = "home.html";
       } else {
         alert("ログインに失敗しました");
       }
-
     } catch (err) {
       console.error(err);
       alert("通信エラーが発生しました");
