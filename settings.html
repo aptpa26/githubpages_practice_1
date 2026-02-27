@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>設定</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>設定</h1>
+  </header>
+  
+  <button id="ResetBtn">履修リセット</button>
+
+  <!-- home.html の body の最後に追加 -->
+  <script>
+    // 仮に設置
+    document.getElementById("ResetBtn").addEventListener("click", () => {
+      localStorage.removeItem("chapters");
+      location.reload(); // ページ更新して初期状態を反映
+    });
+  </script>
+
+</body>
+</html>
