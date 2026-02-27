@@ -15,7 +15,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
     if (j.ok) {
       localStorage.setItem("token", j.token); // トークン保存
-      location.href = "form.html"; // 書き込みページに遷移
+      location.href = "home.html"; // 書き込みページに遷移
     } else {
       document.getElementById("status").innerText = "ログインに失敗しました";
     }
