@@ -7,7 +7,7 @@ async function checkLoginAndRedirect() {
 
   if (!token) {
     console.log("No token → redirecting to login");
-    //window.location.href = "index.html"; // login
+    window.location.href = "index.html"; // login
     return;
   }
 
@@ -24,10 +24,10 @@ async function checkLoginAndRedirect() {
     if (!result.ok) {
       console.log("Token invalid → redirect to login");
       localStorage.removeItem("token");
-      //window.location.href = "index.html";
+      window.location.href = "index.html";
     }
   } catch (err) {
     console.error("Error checking token:", err);
-    //window.location.href = "index.html";
+    window.location.href = "index.html";
   }
 }
