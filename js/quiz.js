@@ -1,111 +1,88 @@
 const params = new URLSearchParams(location.search);
 const chapterId = params.get("id");
 
-// クイズデータ
-const quizzes = [
-  [
-    {
-      q: "問題1: JavaScriptの変数を宣言するときのキーワードは？",
-      a: ["var", "foo", "1st"],
-      correct: 0
-    },
-    {
-      q: "問題2: 配列の最後に値を追加するメソッドは？",
-      a: ["pop()", "push()", "shift()"],
-      correct: 1
-    }
-  ],
-  [
-    {
-      q: "別チャプ1: HTMLのタグはどれ？",
-      a: ["<>", "!!", "<html>"],
-      correct: 2
-    }
-  ]
-];
-
 // DOM
 const quizForm = document.getElementById("quizForm");
 const submitBtn = document.getElementById("submitBtn");
 const resultArea = document.getElementById("result");
 const homeBtn = document.getElementById("homeBtn");
 
-// 表示
-quizzes[chapterId - 1].forEach((item, i) => {
-  const div = document.createElement("div");
-  div.classList.add("quiz-question");
-  div.innerHTML = `<p>${i + 1}. ${item.q}</p>`;
+// JSON からクイズを読み込む
+fetch("quizzes.json")
+  .then(res => res.json())
+  .then(allQuizzes => {
+    const quizzes = allQuizzes[chapterId - 1];
 
-  item.a.forEach((ans, ai) => {
-    const id = `q${i}_a${ai}`;
-    div.innerHTML += `
-      <div>
-        <input type="radio" name="q${i}" id="${id}" value="${ai}">
-        <label for="${id}">${ans}</label>
-      </div>
-    `;
-  });
+    // クイズ表示
+    quizzes.forEach((item, i) => {
+      const div = document.createElement("div");
+      div.classList.add("quiz-question");
+      div.innerHTML = `<p>${i + 1}. ${item.q}</p>`;
 
-  quizForm.appendChild(div);
-});
+      item.a.forEach((ans, ai) => {
+        const id = `q${i}_a${ai}`;
+        div.innerHTML += `
+          <div>
+            <input type="radio" name="q${i}" id="${id}" value="${ai}">
+            <label for="${id}">${ans}</label>
+          </div>
+        `;
+      });
 
-// 採点処理
-submitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+      quizForm.appendChild(div);
+    });
 
-  resultArea.style.display = "block";
+    // 採点
+    submitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      resultArea.style.display = "block";
 
-  let score = 0;
-  let total = quizzes[chapterId - 1].length;
+      let score = 0;
+      let total = quizzes.length;
 
-  resultArea.innerHTML = "<h3>採点結果</h3>";
+      resultArea.innerHTML = "<h3>採点結果</h3>";
 
-  quizzes[chapterId - 1].forEach((item, i) => {
-    const selected = quizForm[`q${i}`].value;
-    const correct = item.correct;
+      quizzes.forEach((item, i) => {
+        const selected = quizForm[`q${i}`].value;
+        const correct = item.correct;
 
-    // 各質問エリアを取得
-    const container = quizForm.querySelector(`div.quiz-question:nth-child(${i+1})`);
+        const container = quizForm.querySelector(`div.quiz-question:nth-child(${i+1})`);
+        const labels = container.querySelectorAll("label");
 
-    // 全ラベルを取得
-    const labels = container.querySelectorAll("label");
+        labels.forEach((label, ai) => {
+          label.classList.remove("correct-answer", "incorrect-answer", "not-selected");
 
-    labels.forEach((label, ai) => {
-      label.classList.remove("correct-answer", "incorrect-answer", "not-selected");
+          if(ai === correct) label.classList.add("correct-answer");
+          if(ai == parseInt(selected)) {
+            if(ai === correct) score++;
+            else label.classList.add("incorrect-answer");
+          } else if(selected === "") {
+            label.classList.add("not-selected");
+          }
+        });
 
-      if (ai == correct) {
-        // 正解ラベル
-        label.classList.add("correct-answer");
-      }
-      if (ai == parseInt(selected)) {
-        // ユーザー選択
-        if (ai == correct) {
-          score++;
-        } else {
-          label.classList.add("incorrect-answer");
-        }
-      } else if (selected === "") {
-        // 選択なしの場合
-        label.classList.add("not-selected");
+        resultArea.innerHTML += `
+          <p>問${i + 1}：${parseInt(selected) === correct ? "✅ 正解" : "❌ 不正解"}</p>
+        `;
+      });
+
+      const rate = ((score / total) * 100).toFixed(1);
+      resultArea.innerHTML += `<p>正答率：${rate}% (${score}/${total})</p>`;
+
+      submitBtn.style.display = "none";
+      homeBtn.style.display = "block";
+
+      // ✅ 全問正解なら localStorage に保存
+      if(score === total) {
+        const saved = localStorage.getItem("chapters");
+        const progress = saved ? JSON.parse(saved) : {};
+        progress[chapterId] = "completed";
+        localStorage.setItem("chapters", JSON.stringify(progress));
       }
     });
 
-    resultArea.innerHTML += `
-      <p>
-        問${i + 1}：
-        ${parseInt(selected) === correct ? "✅ 正解" : "❌ 不正解"} 
-      </p>
-    `;
+    // ホームへ
+    homeBtn.addEventListener("click", () => {
+      location.href = "home.html";
+    });
   });
-
-  const rate = ((score / total) * 100).toFixed(1);
-  resultArea.innerHTML += `<p>正答率：${rate}% (${score}/${total})</p>`;
-
-  submitBtn.style.display = "none";
-  homeBtn.style.display = "block";
-});
-
-// ホームへ戻る
-homeBtn.addEventListener("click", () => {
-  location.href = "home.html";
-});
