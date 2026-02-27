@@ -1,27 +1,16 @@
-document.getElementById("loginForm").addEventListener("submit", async function(e) {
-  e.preventDefault(); // フォーム送信のページリロードを防ぐ
+const form = document.getElementById("loginForm");
 
-  const id = document.getElementById("user").value;
-  const pw = document.getElementById("pass").value;
+form.addEventListener("submit", (e) => {
+  e.preventDefault(); // ページリロードを止める
 
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwNrCeV86YSoLym46BCSDBDli3k34TN74--TDrnU-vPXOiG_-tnguE_fR81FVcr7DYTSQ/exec?path=login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id, password: pw }),
-    });
+  const username = document.getElementById("user").value;
+  const password = document.getElementById("pass").value;
 
-    const j = await res.json();
-
-    if (j.ok) {
-      localStorage.setItem("token", j.token); // トークン保存
-      location.href = "home.html"; // 書き込みページに遷移
-    } else {
-      document.getElementById("status").innerText = "ログインに失敗しました";
-    }
-
-  } catch (err) {
-    console.error(err);
-    document.getElementById("status").innerText = "通信エラーが発生しました";
+  // ここでは仮のログインチェック
+  if (username === "user" && password === "pass") {
+    // 成功 → home.htmlへ移動
+    window.location.href = "home.html";
+  } else {
+    alert("ログイン失敗");
   }
 });
