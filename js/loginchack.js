@@ -4,8 +4,10 @@ const GAS_URL = "https://script.google.com/macros/s/AKfycbwNrCeV86YSoLym46BCSDBD
 
 async function checkLoginAndRedirect() {
   const token = localStorage.getItem("token");
+
   if (!token) {
-    window.location.href = "index.html";
+    console.log("No token → redirecting to login");
+    window.location.href = "index.html"; // login
     return;
   }
 
@@ -17,10 +19,15 @@ async function checkLoginAndRedirect() {
     });
 
     const result = await res.json();
+    console.log("Token check:", result);
+
     if (!result.ok) {
+      console.log("Token invalid → redirect to login");
+      localStorage.removeItem("token");
       window.location.href = "index.html";
     }
   } catch (err) {
+    console.error("Error checking token:", err);
     window.location.href = "index.html";
   }
 }
