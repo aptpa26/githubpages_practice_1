@@ -20,6 +20,8 @@ async function init() {
       return;
     }
 
+    console.error(data)
+
     renderChapters(data.chapters || [], data.progress || {}, token);
 
   } catch (err) {
