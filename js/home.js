@@ -11,9 +11,12 @@ fetch('chapters.json')
     const userProgress = saved ? JSON.parse(saved) : {};
 
     data.forEach(chapter => {
-      // ローカルストレージに保存があれば優先
-      if(userProgress[chapter.id]) {
+      if (userProgress[chapter.id]) {
+        // ローカルストレージに保存されていれば優先
         chapter.status = userProgress[chapter.id];
+      } else {
+        // 保存されていなければ未履修扱い
+        chapter.status = "not-started";
       }
 
       const card = document.createElement('div');
