@@ -12,11 +12,21 @@ async function checkLoginAndRedirect() {
   }
 
   try {
-    const res = await fetch(`${GAS_URL}?path=checkToken`, {
+    const res = await fetch(GAS_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ token })
+      body: JSON.stringify({
+      path: "checkToken",
+      token: token  
+      })
     });
+    
+    
+    // fetch(`${GAS_URL}?path=checkToken`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "text/plain;charset=utf-8" },
+    //   body: JSON.stringify({ token })
+    // });
 
     const result = await res.json();
     console.log("Token check:", result);

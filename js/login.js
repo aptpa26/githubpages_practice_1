@@ -14,10 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch(`${GAS_URL}?path=login`, {
+      const res = await fetch(GAS_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ id, password: pw })
+        body: JSON.stringify({
+          path: "login",
+          id: id,
+          password: pw
+        })
       });
 
       const j = await res.json();
