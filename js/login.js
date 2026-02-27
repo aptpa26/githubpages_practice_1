@@ -1,16 +1,37 @@
-const form = document.getElementById("loginForm");
+// GASのURLを定義（環境に合わせて置き換え）
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwNrCeV86YSoLym46BCSDBDli3k34TN74--TDrnU-vPXOiG_-tnguE_fR81FVcr7DYTSQ/exec";
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); // ページリロードを止める
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.getElementById("loginBtn");
 
-  const username = document.getElementById("user").value;
-  const password = document.getElementById("pass").value;
+  loginBtn.addEventListener("click", async () => {
+    const id = document.getElementById("id").value.trim();
+    const pw = document.getElementById("pw").value;
 
-  // ここでは仮のログインチェック
-  if (username === "user" && password === "pass") {
-    // 成功 → home.htmlへ移動
-    window.location.href = "home.html";
-  } else {
-    alert("ログイン失敗");
-  }
+    if (!id || !pw) {
+      alert("ユーザー名とパスワードを入力してください");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${GAS_URL}?path=login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, password: pw })
+      });
+
+      const j = await res.json();
+
+      if (j.ok && j.token) {
+        localStorage.setItem("token", j.token);
+        window.location.href = "home.html"; // ログイン後のページ
+      } else {
+        alert("ログインに失敗しました");
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("通信エラーが発生しました");
+    }
+  });
 });
