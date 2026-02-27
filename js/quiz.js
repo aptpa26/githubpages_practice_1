@@ -1,5 +1,5 @@
 const params = new URLSearchParams(location.search);
-const chapterId = params.get("id");
+const chapterId = parseInt(params.get("id"), 10);
 
 // DOM
 const quizForm = document.getElementById("quizForm");
@@ -7,13 +7,25 @@ const submitBtn = document.getElementById("submitBtn");
 const resultArea = document.getElementById("result");
 const homeBtn = document.getElementById("homeBtn");
 
-// JSON からクイズを読み込む
+/* localStorage 共通関数 */
+function getProgress() {
+  const saved = localStorage.getItem("chapters");
+  return saved ? JSON.parse(saved) : {};
+}
+function setProgress(chapterId, status) {
+  const progress = getProgress();
+  progress[chapterId] = status;
+  localStorage.setItem("chapters", JSON.stringify(progress));
+}
+
+/* ----------------------------
+   クイズ読み込み
+---------------------------- */
 fetch("quizzes.json")
   .then(res => res.json())
   .then(allQuizzes => {
     const quizzes = allQuizzes[chapterId - 1];
 
-    // クイズ表示
     quizzes.forEach((item, i) => {
       const div = document.createElement("div");
       div.classList.add("quiz-question");
@@ -32,14 +44,13 @@ fetch("quizzes.json")
       quizForm.appendChild(div);
     });
 
-    // 採点
+    /* 採点 */
     submitBtn.addEventListener("click", (e) => {
       e.preventDefault();
       resultArea.style.display = "block";
 
       let score = 0;
       let total = quizzes.length;
-
       resultArea.innerHTML = "<h3>採点結果</h3>";
 
       quizzes.forEach((item, i) => {
@@ -72,17 +83,12 @@ fetch("quizzes.json")
       submitBtn.style.display = "none";
       homeBtn.style.display = "block";
 
-      // ✅ 全問正解なら localStorage に保存
+      // ✅ 全問正解なら完了に反映
       if(score === total) {
-        const saved = localStorage.getItem("chapters");
-        const progress = saved ? JSON.parse(saved) : {};
-        progress[chapterId] = "completed";
-        localStorage.setItem("chapters", JSON.stringify(progress));
+        setProgress(chapterId, "completed");
       }
     });
 
-    // ホームへ
-    homeBtn.addEventListener("click", () => {
-      location.href = "home.html";
-    });
+    // ホームに戻る
+    homeBtn.addEventListener("click", () => location.href = "home.html");
   });

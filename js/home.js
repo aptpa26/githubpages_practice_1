@@ -1,73 +1,51 @@
 /* ----------------------------
-   データ取得＆カード生成
+   共通 localStorage 関数
 ---------------------------- */
-fetch('chapters.json')
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById('chapters');
+function getProgress() {
+  const saved = localStorage.getItem("chapters");
+  return saved ? JSON.parse(saved) : {};
+}
 
-    // ローカルストレージからユーザー進捗を取得
-    const saved = localStorage.getItem("chapters");
-    const userProgress = saved ? JSON.parse(saved) : {};
+function setProgress(chapterId, status) {
+  const progress = getProgress();
+  progress[chapterId] = status;
+  localStorage.setItem("chapters", JSON.stringify(progress));
+}
 
-    data.forEach(chapter => {
-      if (userProgress[chapter.id]) {
-        // ローカルストレージに保存されていれば優先
-        chapter.status = userProgress[chapter.id];
-      } else {
-        // 保存されていなければ未履修扱い
-        chapter.status = "not-started";
-      }
+/* ----------------------------
+   カード生成＆ステータス反映
+---------------------------- */
+fetch("chapters.json")
+  .then(res => res.json())
+  .then(chapters => {
+    const container = document.getElementById("chapters");
+    const progress = getProgress();
 
-      const card = document.createElement('div');
-      card.className = `card ${chapter.status}`;
+    chapters.forEach(chapter => {
+      // ローカルストレージ優先、なければ未履修
+      let status = progress[chapter.id] || "not-started";
+
+      const card = document.createElement("div");
+      card.className = `card ${status}`;
 
       card.innerHTML = `
         <div class="title">${chapter.title}</div>
-        <div class="status-badge">${getStatusText(chapter.status)}</div>
+        <div class="status-badge">${status === "completed" ? "完了" : (status === "in-progress" ? "進行中" : "未履修")}</div>
         <div class="status-bar"></div>
       `;
 
-      // クリックで in-progress に更新
-      card.addEventListener('click', () => {
-        markInProgress(chapter.id, card);
-      });
-
-      // クリックでチャプターに飛ぶ場合
-      card.addEventListener('click', () => {
-        window.location.href = `chapter.html?id=${chapter.id}`;
+      // カードクリックで in-progress に更新＋チャプターへ遷移
+      card.addEventListener("click", () => {
+        if(status !== "completed") {
+          setProgress(chapter.id, "in-progress");
+          card.classList.remove("not-started");
+          card.classList.add("in-progress");
+          card.querySelector(".status-badge").textContent = "進行中";
+          status = "in-progress";
+        }
+        location.href = `chapter.html?id=${chapter.id}`;
       });
 
       container.appendChild(card);
     });
   });
-
-/* ----------------------------
-   ステータス文字表示
----------------------------- */
-function getStatusText(status) {
-  switch(status) {
-    case 'completed': return '完了';
-    case 'in-progress': return '進行中';
-    default: return '未履修';
-  }
-}
-
-/* ----------------------------
-   in-progress 更新
----------------------------- */
-function markInProgress(id, card) {
-  const saved = localStorage.getItem("chapters");
-  const progress = saved ? JSON.parse(saved) : {};
-
-  // 完了済みなら変更しない
-  if(progress[id] === "completed") return;
-
-  progress[id] = "in-progress";
-  localStorage.setItem("chapters", JSON.stringify(progress));
-
-  // カードの見た目更新
-  card.classList.remove('not-started');
-  card.classList.add('in-progress');
-  card.querySelector('.status-badge').textContent = "進行中";
-}
