@@ -1,22 +1,13 @@
 // ローカルストレージから進行状況を取得
 function getProgress() {
   const saved = localStorage.getItem("progress");
-  return saved ? JSON.parse(saved) : {};  // progress が null でも空のオブジェクトを返す
+  return saved ? JSON.parse(saved) : {};
 }
 
 // 進行状況を保存
-function setProgress(chapterId, sectionId, status) {
+function setProgress(chapterId, status) {
   const progress = getProgress();
-  
-  // チャプターが存在しない場合は空のオブジェクトを作成
-  if (!progress[chapterId]) {
-    progress[chapterId] = {};
-  }
-  
-  // セクションの進行状況を保存
-  progress[chapterId][sectionId] = status;
-
-  // ローカルストレージに進行状況を保存
+  progress[chapterId] = status;
   localStorage.setItem("progress", JSON.stringify(progress));
 }
 
@@ -25,35 +16,27 @@ fetch('data/chapters.json')  // chapters.json を読み込む（チャプター�
   .then(response => response.json())
   .then(chapters => {
     const container = document.getElementById("chapters");
-    const progress = getProgress();  // 現在の進行状況を取得
+    const progress = getProgress();
 
     // チャプターごとにカードを生成
     chapters.forEach(chapter => {
-      // 各セクションに対してカードを生成
-      chapter.sections.forEach(section => {
-        // 進行状況の取得（未着手、進行中、完了）
-        let status = progress[chapter.id] && progress[chapter.id][section.id] || "not-started";
+      // 進行状況の取得（未着手、進行中、完了）
+      let status = progress[chapter.id] || "not-started";
 
-        // statusがundefinedやnullの場合、"not-started"にデフォルト設定
-        if (typeof status !== "string") {
-          status = "not-started";
-        }
+      const chapterDiv = document.createElement("div");
+      chapterDiv.classList.add("card", status);  // 進行状況に基づいてクラスを変更
+      chapterDiv.innerHTML = `
+        <div class="title">${chapter.title}</div>
+        <div class="status-badge">${status === "completed" ? "完了" : (status === "in-progress" ? "進行中" : "未履修")}</div>
+        <div class="status-bar"></div>
+      `;
 
-        const chapterDiv = document.createElement("div");
-        chapterDiv.classList.add("card", status);  // 進行状況に基づいてクラスを変更
-        chapterDiv.innerHTML = `
-          <div class="title">${section.title}</div>
-          <div class="status-badge">${status === "completed" ? "完了" : (status === "in-progress" ? "進行中" : "未履修")}</div>
-          <div class="status-bar"></div>
-        `;
-
-        // チャプターカードをクリックしたときの遷移
-        chapterDiv.addEventListener("click", () => {
-          location.href = `section.html?chapterId=${chapter.id}&sectionId=${section.id}`;  // セクションページへ遷移
-        });
-
-        container.appendChild(chapterDiv);
+      // チャプターカードをクリックしたときの遷移
+      chapterDiv.addEventListener("click", () => {
+        location.href = `chapter.html?chapterId=${chapter.id}`;  // チャプター詳細ページへ遷移
       });
+
+      container.appendChild(chapterDiv);
     });
   })
   .catch(err => {
