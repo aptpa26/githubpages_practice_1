@@ -25,7 +25,7 @@ fetch("csv/chapters.csv")
 
         chapters.forEach((chapter, index) => {
           // ローカルストレージ優先、なければ未履修
-          let status = progress[index] || "not-started";
+          let status = progress[index+1] || "not-started";
 
           const card = document.createElement("div");
           card.className = `card ${status}`;
@@ -39,13 +39,13 @@ fetch("csv/chapters.csv")
           // カードクリックで in-progress に更新＋チャプターへ遷移
           card.addEventListener("click", () => {
             if(status !== "completed") {
-              setProgress(index, "in-progress");  // indexで進行状況を更新
+              setProgress(index+1, "in-progress");  // indexで進行状況を更新
               card.classList.remove("not-started");
               card.classList.add("in-progress");
               card.querySelector(".status-badge").textContent = "進行中";
               status = "in-progress";
             }
-            location.href = `chapter.html?id=${index}`;  // indexを使って遷移
+            location.href = `chapter.html?id=${index+1}`;  // indexを使って遷移
           });
 
           container.appendChild(card);
