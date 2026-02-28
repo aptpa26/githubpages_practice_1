@@ -1,42 +1,23 @@
 const params = new URLSearchParams(location.search);
-const chapterId = parseInt(params.get("id"), 10);
+const chapterId = parseInt(params.get("chapterId"), 10);
+const sectionId = parseInt(params.get("sectionId"), 10);
 
-// DOM要素
-const quizForm = document.getElementById("quizForm");
-const submitBtn = document.getElementById("submitBtn");
-const resultArea = document.getElementById("result");
-const homeBtn = document.getElementById("homeBtn");
+// クイズのCSVファイル名
+const quizFileName = `csv/chapter${chapterId}_section${sectionId}_quiz.csv`;
 
-// localStorage 共通関数
-function getProgress() {
-  const saved = localStorage.getItem("chapters");
-  return saved ? JSON.parse(saved) : {};
-}
-
-function setProgress(index, status) {
-  const progress = getProgress();
-  progress[index] = status;  // indexを使って進行状況を保存
-  localStorage.setItem("chapters", JSON.stringify(progress));
-}
-
-// 動的にCSVファイルを読み込む
-const quizFileName = `csv/chapter${chapterId}_quiz.csv`;
-
+// クイズの読み込み
 fetch(quizFileName)
-  .then(res => {
-    if (!res.ok) {
-      // CSVが存在しない場合やサーバーエラーの場合
-      throw new Error(`ファイルが見つかりません: ${quizFileName}`);
-    }
-    return res.text();  // CSVをテキストとして読み込む
-  })
+  .then(res => res.text())
   .then(csv => {
-    // CSVをパース
     Papa.parse(csv, {
-      header: true,  // ヘッダーをキーとして使う
-      dynamicTyping: true,  // 数字やブール値を自動的に適切な型に変換
+      header: true,
+      dynamicTyping: true,
       complete: function(results) {
-        const quizzes = results.data;  // パースしたクイズデータ
+        const quizzes = results.data;
+        const quizForm = document.getElementById("quizForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const resultArea = document.getElementById("result");
+        const homeBtn = document.getElementById("homeBtn");
 
         // クイズ項目をフォームに追加
         quizzes.forEach((item, i) => {
@@ -60,7 +41,7 @@ fetch(quizFileName)
           quizForm.appendChild(div);
         });
 
-        // 採点ボタンがクリックされた時の処理
+        // 採点処理
         submitBtn.addEventListener("click", (e) => {
           e.preventDefault();
           resultArea.style.display = "block";
@@ -96,22 +77,21 @@ fetch(quizFileName)
           const rate = ((score / total) * 100).toFixed(1);
           resultArea.innerHTML += `<p>正答率：${rate}% (${score}/${total})</p>`;
 
+          // セクション完了
+          if(score === total) {
+            setProgress(chapterId, sectionId, "completed");
+          }
+
           submitBtn.style.display = "none";
           homeBtn.style.display = "block";
-
-          // ✅ 全問正解なら完了に反映
-          if(score === total) {
-            setProgress(chapterId, "completed");
-          }
         });
 
-        // ホームに戻る
+        // ホームボタン
         homeBtn.addEventListener("click", () => location.href = "home.html");
       }
     });
   })
   .catch(err => {
-    console.error("CSVの読み込みに失敗しました:", err.message);  // エラーメッセージ
-    console.error(err.stack);  // スタックトレースを出力
-    window.location.href = "home.html";  // エラー時にホームに戻る
+    console.error("CSVの読み込みに失敗しました:", err);
+    window.location.href = "home.html";
   });
