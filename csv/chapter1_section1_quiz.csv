@@ -1,4 +1,3 @@
 question,1,2,3,answer
-JavaScriptの変数を宣言するときのキーワードは？,var,foo,1st,1
-配列の最後に値を追加するメソッドは？,pop(),push(),shift(),2
-関数を定義する際に使うキーワードは？,function,class,return,1
+「こんにちは」を英語で言う時のフレーズは？,Hello,Goodbye,Please,1
+「お元気ですか？」を英語で言うには？,How are you?,What time is it?,Where are you?,1
