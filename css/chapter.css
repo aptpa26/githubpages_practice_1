@@ -1,64 +1,58 @@
-/* ‼ チャプター動画ページ用スタイル */
+/* チャプター詳細ページのスタイル */
 
-/* ページ全体の余白 */
-.container {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+/* セクションカード */
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
-/* タイトル（動画を見る） */
-.container h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 14px;
-}
-
-/* 動画ラッパー（レスポンシブ対応） */
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 アスペクト比 */
-  margin-bottom: 18px;
-  background: #000;
-}
-
-/* YouTube iframe を中に入れた状態でレスポンシブ */
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* クイズへボタン */
-#goQuizBtn {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  margin-top: 16px;
-  background-color: #0288d1;
-  color: #fff;
+.card .title {
   font-size: 18px;
   font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
 }
 
-/* ボタンのホバー効果 */
-#goQuizBtn:hover {
-  background-color: #0277bd;
+.card .status-badge {
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 12px;
 }
 
-/* 小さめデバイス（スマホ）対応 */
-@media (max-width: 480px) {
-  #goQuizBtn {
-    font-size: 16px;
-    padding: 12px;
-  }
+/* 未履修 */
+.card.not-started {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+/* 進行中 */
+.card.in-progress {
+  background-color: #fef7e1;
+  border: 1px solid #ffc107;
+}
+
+/* 完了 */
+.card.completed {
+  background-color: #e1f7d5;
+  border: 1px solid #4caf50;
+}
+
+.card:hover {
+  opacity: 0.8;
+}
+
+/* ステータスバー */
+.card .status-bar {
+  height: 4px;
+  background-color: #ddd;
+  margin-top: 10px;
+}
+
+.status-badge {
+  background-color: #ccc;
+  color: white;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 12px;
 }

@@ -1,0 +1,64 @@
+/* ‼ チャプター動画ページ用スタイル */
+
+/* ページ全体の余白 */
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* タイトル（動画を見る） */
+.container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 14px;
+}
+
+/* 動画ラッパー（レスポンシブ対応） */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 アスペクト比 */
+  margin-bottom: 18px;
+  background: #000;
+}
+
+/* YouTube iframe を中に入れた状態でレスポンシブ */
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* クイズへボタン */
+#goQuizBtn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  background-color: #0288d1;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* ボタンのホバー効果 */
+#goQuizBtn:hover {
+  background-color: #0277bd;
+}
+
+/* 小さめデバイス（スマホ）対応 */
+@media (max-width: 480px) {
+  #goQuizBtn {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
