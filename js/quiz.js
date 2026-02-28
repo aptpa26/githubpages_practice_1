@@ -1,11 +1,17 @@
 const params = new URLSearchParams(location.search);
-const chapterId = parseInt(params.get("chapterId"), 10);
-const sectionId = parseInt(params.get("sectionId"), 10);
+const chapterId = parseInt(params.get("id"), 10);
+const sectionId = parseInt(params.get("section"), 10);
+
+// DOM要素
+const quizForm = document.getElementById("quizForm");
+const submitBtn = document.getElementById("submitBtn");
+const resultArea = document.getElementById("result");
+const homeBtn = document.getElementById("homeBtn");
 
 // クイズのCSVファイル名
 const quizFileName = `csv/chapter${chapterId}_section${sectionId}_quiz.csv`;
 
-// クイズの読み込み
+// CSVの読み込み
 fetch(quizFileName)
   .then(res => res.text())
   .then(csv => {
@@ -14,10 +20,6 @@ fetch(quizFileName)
       dynamicTyping: true,
       complete: function(results) {
         const quizzes = results.data;
-        const quizForm = document.getElementById("quizForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const resultArea = document.getElementById("result");
-        const homeBtn = document.getElementById("homeBtn");
 
         // クイズ項目をフォームに追加
         quizzes.forEach((item, i) => {

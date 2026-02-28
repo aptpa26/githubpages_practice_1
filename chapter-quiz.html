@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>クイズ</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/chapter-quiz.css">
+  <link rel="stylesheet" href="css/chapter-quiz.css">  
 </head>
 <body>
 
-  <div class="container">
-    <h2>クイズに挑戦！</h2>
-    <form id="quizForm"></form>
-    <button id="submitBtn">採点する</button>
-    <div id="result"></div>
-    <button id="homeBtn" style="display:none;">ホームへ戻る</button>
-  </div>
+<div class="container">
+  <h2>クイズに挑戦！</h2>
 
-  <script src="js/quiz.js"></script>
+  <form id="quizForm"></form>
+
+  <button id="submitBtn">採点する</button>
+
+  <div id="result"></div>
+  <button id="homeBtn" style="display:none;">ホームへ戻る</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="js/quiz.js"></script>
+
 </body>
 </html>
