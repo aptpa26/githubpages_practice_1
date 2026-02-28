@@ -19,7 +19,7 @@ function setProgress(chapterId, status) {
 }
 
 // CSV読み込み＆クイズ表示
-fetch("chapter1_quiz.csv")
+fetch("csv/chapter1_quiz.csv")
   .then(res => res.text())  // CSVをテキストとして読み込む
   .then(csv => {
     // CSVをパース
