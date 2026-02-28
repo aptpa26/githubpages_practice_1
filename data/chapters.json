@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "チャプター 1",
+    "sections": [
+      {
+        "title": "セクション 1",
+        "videoId": "VIDEO_ID_1"
+      },
+      {
+        "title": "セクション 2",
+        "videoId": "VIDEO_ID_2"
+      }
+    ]
+  }
+]
