@@ -89,5 +89,5 @@ fetch(quizFileName)
   })
   .catch(err => {
     console.error("CSVの読み込みに失敗しました:", err);
-    window.location.href = "home.html";
+    //window.location.href = "home.html";
   });
