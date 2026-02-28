@@ -20,7 +20,7 @@ function setProgress(chapterId, status) {
 }
 
 // 動的にCSVファイルを読み込む
-const quizFileName = `chapter${chapterId}_quiz.csv`; // 例えば chapter3_quiz.csv
+const quizFileName = `csv/chapter${chapterId}_quiz.csv`;
 
 fetch(quizFileName)
   .then(res => res.text())  // CSVをテキストとして読み込む
@@ -39,7 +39,7 @@ fetch(quizFileName)
           div.innerHTML = `<p>${i + 1}. ${item.question}</p>`;
 
           const answers = [item["1"], item["2"], item["3"]];
-          const correctAnswer = item.answer;
+          const correctAnswer = item.answer - 1;
 
           answers.forEach((answer, ai) => {
             const id = `q${i}_a${ai}`;
@@ -65,7 +65,7 @@ fetch(quizFileName)
 
           quizzes.forEach((item, i) => {
             const selected = quizForm[`q${i}`].value;
-            const correct = item.answer;
+            const correct = item.answer - 1;
 
             const container = quizForm.querySelector(`div.quiz-question:nth-child(${i + 1})`);
             const labels = container.querySelectorAll("label");
