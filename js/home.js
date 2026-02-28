@@ -20,8 +20,18 @@ fetch('data/chapters.json')  // chapters.json を読み込む（チャプター�
 
     // チャプターごとにカードを生成
     chapters.forEach(chapter => {
-      // 進行状況の取得（未着手、進行中、完了）
-      let status = progress[chapter.id] || "not-started";
+      // チャプター内のすべてのセクションの進行状況を取得
+      let status = "not-started"; // デフォルトは未履修
+      if (progress[chapter.id]) {
+        // セクションごとの進行状況を確認
+        const sections = progress[chapter.id];
+        // セクションごとに最も進んだ状態を反映（完了 → 進行中 → 未履修）
+        if (Object.values(sections).includes("completed")) {
+          status = "completed";
+        } else if (Object.values(sections).includes("in-progress")) {
+          status = "in-progress";
+        }
+      }
 
       const chapterDiv = document.createElement("div");
       chapterDiv.classList.add("card", status);  // 進行状況に基づいてクラスを変更
