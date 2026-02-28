@@ -1,58 +1,144 @@
-/* チャプター詳細ページのスタイル */
+/* ===========================
+   全体リセット / ベース
+=========================== */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  line-height: 1.6;
+}
 
-/* セクションカード */
+/* ===========================
+   ヘッダー
+=========================== */
+.page-header {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* ===========================
+   セクショングリッド
+=========================== */
+.sections {
+  display: grid;
+  gap: 12px;
+  padding: 0 14px;
+  margin-bottom: 100px; /* bottom-nav に被らない余白 */
+}
+
+/* ===========================
+   カード
+=========================== */
 .card {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 15px;
-  cursor: pointer;
-}
-
-.card .title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.card .status-badge {
-  font-size: 14px;
-  padding: 5px 10px;
-  border-radius: 12px;
-}
-
-/* 未履修 */
-.card.not-started {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-}
-
-/* 進行中 */
-.card.in-progress {
-  background-color: #fef7e1;
-  border: 1px solid #ffc107;
-}
-
-/* 完了 */
-.card.completed {
-  background-color: #e1f7d5;
-  border: 1px solid #4caf50;
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  transition: transform .15s ease, box-shadow .15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card:hover {
-  opacity: 0.8;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.18);
+}
+
+/* カード内タイトル */
+.card .title {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+/* ===========================
+   ステータスバッジ
+=========================== */
+.card .status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 8px;
 }
 
 /* ステータスバー */
 .card .status-bar {
-  height: 4px;
+  height: 6px;
+  border-radius: 3px;
+  width: 100%;
   background-color: #ddd;
-  margin-top: 10px;
+  overflow: hidden;
 }
 
-.status-badge {
-  background-color: #ccc;
-  color: white;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 12px;
+/* ===========================
+   状態別カラー
+=========================== */
+.card.completed .status-badge { background-color: #4caf50; }
+.card.completed .status-bar   { background-color: #4caf50; }
+
+.card.in-progress .status-badge { background-color: #ff9800; }
+.card.in-progress .status-bar   { background-color: #ff9800; }
+
+.card.not-started .status-badge { background-color: #999; }
+.card.not-started .status-bar   { background-color: #ccc; }
+
+/* ===========================
+   下部固定ナビ
+=========================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+/* ナビリンク */
+.bottom-nav .nav-link {
+  text-decoration: none;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ラベル文字 */
+.bottom-nav .label {
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* ===========================
+   レスポンシブ
+=========================== */
+@media (max-width: 767px) {
+  .sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .sections {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    padding: 0 24px;
+  }
 }
