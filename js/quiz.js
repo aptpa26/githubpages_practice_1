@@ -23,7 +23,13 @@ function setProgress(chapterId, status) {
 const quizFileName = `csv/chapter${chapterId}_quiz.csv`;
 
 fetch(quizFileName)
-  .then(res => res.text())  // CSVをテキストとして読み込む
+  .then(res => {
+    if (!res.ok) {
+      // CSVが存在しない場合やサーバーエラーの場合
+      throw new Error(`ファイルが見つかりません: ${quizFileName}`);
+    }
+    return res.text();  // CSVをテキストとして読み込む
+  })
   .then(csv => {
     // CSVをパース
     Papa.parse(csv, {
@@ -104,8 +110,8 @@ fetch(quizFileName)
       }
     });
   })
-.catch(err => {
-  console.error("CSVの読み込みに失敗しました:", err.message);  // エラーメッセージ
-  console.error(err.stack);  // スタックトレースを出力
-  window.location.href = "home.html";  // エラー時にホームに戻る
-});
+  .catch(err => {
+    console.error("CSVの読み込みに失敗しました:", err.message);  // エラーメッセージ
+    console.error(err.stack);  // スタックトレースを出力
+    window.location.href = "home.html";  // エラー時にホームに戻る
+  });
