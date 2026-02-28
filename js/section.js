@@ -2,7 +2,7 @@ const params = new URLSearchParams(location.search);
 const chapterId = parseInt(params.get("chapterId"), 10);
 const sectionId = parseInt(params.get("sectionId"), 10);
 
-// セクションデータの読み込み
+// チャプターとセクション情報を取得
 fetch('data/chapters.json')
   .then(response => response.json())
   .then(chapters => {
@@ -17,6 +17,6 @@ fetch('data/chapters.json')
 
     // クイズボタン
     document.getElementById("goQuizBtn").addEventListener("click", () => {
-      location.href = `chapter-quiz.html?chapterId=${chapterId}&sectionId=${sectionId}`;
+      location.href = `section_quiz.html?chapterId=${chapterId}&sectionId=${sectionId}`;
     });
   });

@@ -1,22 +1,24 @@
 const params = new URLSearchParams(location.search);
-const chapterId = parseInt(params.get("id"), 10);
-const sectionId = parseInt(params.get("section"), 10);
+const chapterId = parseInt(params.get("chapterId"), 10);
 
-// チャプターとセクションのデータ（例: JSON ファイルから読み込む）
+// チャプター情報を取得
 fetch('data/chapters.json')
   .then(response => response.json())
   .then(chapters => {
     const chapter = chapters.find(c => c.id === chapterId);
-    const section = chapter.sections[sectionId - 1];
+    const container = document.getElementById("sections");
 
-    document.getElementById("section-title").innerText = section.title;
+    chapter.sections.forEach((section, index) => {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.classList.add("section");
+      sectionDiv.innerHTML = `
+        <span>セクション ${index + 1}: ${section.title}</span>
+      `;
+      
+      sectionDiv.addEventListener("click", () => {
+        location.href = `section.html?chapterId=${chapterId}&sectionId=${index + 1}`;
+      });
 
-    // 動画の設定
-    const videoUrl = `https://www.youtube.com/embed/${section.videoId}?rel=0&modestbranding=1`;
-    document.getElementById("ytVideo").src = videoUrl;
-
-    // クイズボタン
-    document.getElementById("goQuizBtn").addEventListener("click", () => {
-      location.href = `chapter-quiz.html?id=${chapterId}&section=${sectionId}`;
+      container.appendChild(sectionDiv);
     });
   });
