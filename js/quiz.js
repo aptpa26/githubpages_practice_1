@@ -106,4 +106,5 @@ fetch(quizFileName)
   })
   .catch(err => {
     console.error("CSVの読み込みに失敗しました:", err);
+    location.href = "home.html"
   });

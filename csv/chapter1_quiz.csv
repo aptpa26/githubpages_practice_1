@@ -1,3 +1,4 @@
 question,1,2,3,answer
 JavaScriptの変数を宣言するときのキーワードは？,var,foo,1st,1
 配列の最後に値を追加するメソッドは？,pop(),push(),shift(),2
+関数を定義する際に使うキーワードは？,function,class,return,1
