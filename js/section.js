@@ -13,7 +13,6 @@ fetch('data/chapters.json')
 
     // 動画の設定
     const videoUrl = `https://www.youtube.com/embed/${section.videoId}?rel=0&modestbranding=1`;
-    console.error(videoUrl)
     document.getElementById("ytVideo").src = videoUrl;
 
     // クイズボタン
