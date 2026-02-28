@@ -104,7 +104,8 @@ fetch(quizFileName)
       }
     });
   })
-  .catch(err => {
-    console.error("CSVの読み込みに失敗しました:", err);
-    window.location.href = "home.html"
-  });
+.catch(err => {
+  console.error("CSVの読み込みに失敗しました:", err.message);  // エラーメッセージ
+  console.error(err.stack);  // スタックトレースを出力
+  window.location.href = "home.html";  // エラー時にホームに戻る
+});
