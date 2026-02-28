@@ -41,7 +41,7 @@ fetch('data/chapters.json')  // chapters.json を読み込む（チャプター�
         // チャプターの進行状況の判定
         if (completedCount === totalSections) {
           status = "completed";
-        } else if (inProgressCount > 0) {
+        } else if (inProgressCount > 0 || completedCount > 0) {
           status = "in-progress";
         } else {
           status = "not-started";
