@@ -42,7 +42,6 @@ fetch("data/chapters.json")
       sectionCard.innerHTML = `
         <div class="title">${section.title}</div>
         <div class="status-badge">${status === "completed" ? "完了" : (status === "in-progress" ? "進行中" : "未履修")}</div>
-        <div class="status-bar"></div>
       `;
 
       sectionCard.addEventListener("click", () => {
