@@ -13,9 +13,9 @@ function getProgress() {
   return saved ? JSON.parse(saved) : {};
 }
 
-function setProgress(chapterId, status) {
+function setProgress(index, status) {
   const progress = getProgress();
-  progress[chapterId] = status;
+  progress[index] = status;  // indexを使って進行状況を保存
   localStorage.setItem("chapters", JSON.stringify(progress));
 }
 

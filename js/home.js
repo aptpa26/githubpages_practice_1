@@ -4,9 +4,9 @@ function getProgress() {
   return saved ? JSON.parse(saved) : {};
 }
 
-function setProgress(chapterId, status) {
+function setProgress(index, status) {
   const progress = getProgress();
-  progress[chapterId] = status;
+  progress[index] = status;  // indexを使って進行状況を保存
   localStorage.setItem("chapters", JSON.stringify(progress));
 }
 
@@ -23,9 +23,9 @@ fetch("csv/chapters.csv")
         const container = document.getElementById("chapters");
         const progress = getProgress();
 
-        chapters.forEach(chapter => {
+        chapters.forEach((chapter, index) => {
           // ローカルストレージ優先、なければ未履修
-          let status = progress[chapter.id] || "not-started";
+          let status = progress[index] || "not-started";
 
           const card = document.createElement("div");
           card.className = `card ${status}`;
@@ -39,13 +39,13 @@ fetch("csv/chapters.csv")
           // カードクリックで in-progress に更新＋チャプターへ遷移
           card.addEventListener("click", () => {
             if(status !== "completed") {
-              setProgress(chapter.id, "in-progress");
+              setProgress(index, "in-progress");  // indexで進行状況を更新
               card.classList.remove("not-started");
               card.classList.add("in-progress");
               card.querySelector(".status-badge").textContent = "進行中";
               status = "in-progress";
             }
-            location.href = `chapter.html?id=${chapter.id}`;
+            location.href = `chapter.html?id=${index}`;  // indexを使って遷移
           });
 
           container.appendChild(card);
