@@ -1,25 +1,79 @@
 [
   {
     "id": 1,
-    "title": "チャプター1",
+    "title": "Chapter 1: Basic Vocabulary",
     "sections": [
       {
-        "title": "セクション1",
+        "title": "Section 1: Greetings",
         "videoId": "VIDEO_ID_1"
       },
       {
-        "title": "セクション2",
+        "title": "Section 2: Common Phrases",
         "videoId": "VIDEO_ID_2"
       }
     ]
   },
   {
     "id": 2,
-    "title": "チャプター2",
+    "title": "Chapter 2: Pronunciation",
     "sections": [
       {
-        "title": "セクション1",
+        "title": "Section 1: Vowel Sounds",
         "videoId": "VIDEO_ID_3"
+      },
+      {
+        "title": "Section 2: Consonant Sounds",
+        "videoId": "VIDEO_ID_4"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Chapter 3: Grammar Basics",
+    "sections": [
+      {
+        "title": "Section 1: Sentence Structure",
+        "videoId": "VIDEO_ID_5"
+      },
+      {
+        "title": "Section 2: Tenses",
+        "videoId": "VIDEO_ID_6"
+      },
+      {
+        "title": "Section 3: Articles and Prepositions",
+        "videoId": "VIDEO_ID_7"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Chapter 4: Building Vocabulary",
+    "sections": [
+      {
+        "title": "Section 1: Daily Life Vocabulary",
+        "videoId": "VIDEO_ID_8"
+      },
+      {
+        "title": "Section 2: Work and Business Vocabulary",
+        "videoId": "VIDEO_ID_9"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Chapter 5: Conversational English",
+    "sections": [
+      {
+        "title": "Section 1: Small Talk",
+        "videoId": "VIDEO_ID_10"
+      },
+      {
+        "title": "Section 2: Asking Questions",
+        "videoId": "VIDEO_ID_11"
+      },
+      {
+        "title": "Section 3: Giving Directions",
+        "videoId": "VIDEO_ID_12"
       }
     ]
   }
