@@ -12,14 +12,17 @@ function getProgress() {
   const saved = localStorage.getItem("chapters");
   return saved ? JSON.parse(saved) : {};
 }
+
 function setProgress(chapterId, status) {
   const progress = getProgress();
   progress[chapterId] = status;
   localStorage.setItem("chapters", JSON.stringify(progress));
 }
 
-// CSV読み込み＆クイズ表示
-fetch("csv/chapter1_quiz.csv")
+// 動的にCSVファイルを読み込む
+const quizFileName = `chapter${chapterId}_quiz.csv`; // 例えば chapter3_quiz.csv
+
+fetch(quizFileName)
   .then(res => res.text())  // CSVをテキストとして読み込む
   .then(csv => {
     // CSVをパース
