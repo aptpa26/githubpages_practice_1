@@ -28,7 +28,7 @@ fetch('data/chapters.json')  // chapters.json にチャプターとセクショ�
       chapterDiv.appendChild(chapterTitle);
 
       chapter.sections.forEach((section, index) => {
-        const sectionStatus = progress[chapter.id] && progress[chapter.id][index + 1] || "not-started";
+        const sectionStatus = progress[chapter.id] && progress[chapter.id][section.videoId] || "not-started";
         
         const sectionDiv = document.createElement("div");
         sectionDiv.classList.add("section", sectionStatus);
