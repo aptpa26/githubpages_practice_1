@@ -11,7 +11,7 @@ function setProgress(chapterId, status) {
 }
 
 // CSV読み込み＆カード生成
-fetch("chapters.csv")
+fetch("csv/chapters.csv")
   .then(res => res.text())  // CSVをテキストとして読み込む
   .then(csv => {
     // PapaParseでCSVをパース
