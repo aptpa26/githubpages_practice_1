@@ -1,4 +1,0 @@
-question,1,2,3,answer
-JavaScriptの真偽値を表す値は？,true,false,1,2
-非同期処理を扱うための構文は？,async/await,forEach,try/catch,1
-文字列を数値に変換するメソッドは？,parseInt(),toString(),split(),1
