@@ -97,6 +97,9 @@ fetch(quizFileName)
           if (score === total) {
             setProgress(chapterId, sectionId, "completed");
           }
+          else {
+            setProgress(chapterId, sectionId, "in-progress")
+          }
         });
 
         // ホームに戻るボタンのクリックイベント
