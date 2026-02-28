@@ -20,6 +20,7 @@
     // 仮に設置
     document.getElementById("ResetBtn").addEventListener("click", () => {
       localStorage.removeItem("chapters");
+      localStorage.removeItem("progress");
       location.reload(); // ページ更新して初期状態を反映
     });
   </script>
