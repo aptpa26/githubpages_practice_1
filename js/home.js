@@ -5,10 +5,10 @@ function getProgress() {
 }
 
 // 進行状況を保存
-function setProgress(chapterId, sectionId, status) {
+function setProgress(chapterId, videoId, status) {
   const progress = getProgress();
   if (!progress[chapterId]) progress[chapterId] = {};
-  progress[chapterId][sectionId] = status;
+  progress[chapterId][videoId] = status;
   localStorage.setItem("progress", JSON.stringify(progress));
 }
 
@@ -27,17 +27,21 @@ fetch('data/chapters.json')  // chapters.json にチャプターとセクショ�
       chapterTitle.innerText = chapter.title;
       chapterDiv.appendChild(chapterTitle);
 
-      chapter.sections.forEach((section, index) => {
+      chapter.sections.forEach(section => {
+        // 各セクションの進行状況を取得
         const sectionStatus = progress[chapter.id] && progress[chapter.id][section.videoId] || "not-started";
         
         const sectionDiv = document.createElement("div");
         sectionDiv.classList.add("section", sectionStatus);
         sectionDiv.innerHTML = `
-          <span>セクション ${index + 1}: ${section.title}</span>
+          <span>セクション: ${section.title}</span>
         `;
         
-        // セクションクリックで遷移
+        // セクションクリックで進行状況を更新
         sectionDiv.addEventListener("click", () => {
+          // セクションの進行状況を「in-progress」に更新
+          setProgress(chapter.id, section.videoId, "in-progress");
+          // 遷移
           location.href = `chapter.html?chapterId=${chapter.id}`;
         });
 
